@@ -121,6 +121,7 @@
 </template>
 
 <script>
+  import dayjs from "dayjs"
 export default {
   name: "register",
   data() {
@@ -188,7 +189,7 @@ export default {
     pagechanges() {
       this.dialogVisible = false;
       if (this.codes === 200) {
-        this.$store.state.user = this.usernames;
+        // this.$store.state.user = this.usernames;
         this.$router.push("/");
       } else {
         this.usernames = "";
@@ -198,7 +199,6 @@ export default {
     },
     //用户登录
     Userlogin() {
-      this.dialogVisible = true
       if (this.phonelogin) {
         if (!this.index1 && !this.index2){
           this.$axios
@@ -209,6 +209,14 @@ export default {
                   .then(res => {
                     this.codes = res.data.code
                     this.msg = res.data.msg
+                    if (res.data.code === 200) {
+                      let d = new Date();
+                      let times = dayjs(d).format("HH");
+                      let user = res.data.data;
+                      localStorage.setItem("user", JSON.stringify(user));
+                      localStorage.setItem("logintime", times);
+                    }
+
                   })
                   .catch(err => {
                     console.log(err);
@@ -236,16 +244,13 @@ export default {
             .then(item => {
               this.codes = item.data.code
               this.msg = item.data.msg
-              // if (item.data.code === 200) {
-              //   let d = new Date();
-              //   let times = this.$comment(d).format("YY-MM-DD HH:mm:ss");
-              //   let user = item.data.data;
-              //   this.codes = item.data.code;
-              //   this.msg = item.data.message;
-              //   this.dialogVisible = true;
-              //   localStorage.setItem("user", JSON.stringify(user));
-              //   localStorage.setItem("logintime", times);
-              // }
+              if (item.data.code === 200) {
+                let d = new Date();
+                let times = dayjs(d).format("HH");
+                let user = item.data.data;
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("logintime", times);
+              }
             })
             .catch(err => {
               console.log(err);
@@ -257,6 +262,11 @@ export default {
           this.msg = "输入错误"
         }
       }
+      let times  = setTimeout(() =>{
+        this.dialogVisible = true
+        clearTimeout(times)
+      },500)
+
     },
     //获取图片验证码
     getcode() {
@@ -270,7 +280,6 @@ export default {
         });
     },
     sendmsg() {
-      console.log(1);
       if (!this.index2) {
         this.$axios
           .req("api/users/sendmsg", {
