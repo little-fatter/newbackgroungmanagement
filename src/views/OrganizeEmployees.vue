@@ -112,8 +112,6 @@
                 Employees: [],//组织员工
                 showEmployees:[],//当前页显示的员工数据
                 allEmployees:[],//当前选中状态的全部员工数据
-                // tableitem:[
-                //     {Names:'姓名'},{JobNumber:'工号'},{mechanism:'机构'},{Componys:'部门'},{timeBegin:'试用期开始时间'},{timeEnd:'试用期结束时间'},{ApprovalStatus:'转正审批状态'},{do:'操作'}],
                 multipleSelection: [],//勾选中的数据
                 currentPage: 1,//当前页
                 currentNum: 10,//每页显示数量

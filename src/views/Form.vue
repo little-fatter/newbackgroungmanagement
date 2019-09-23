@@ -1,12 +1,12 @@
 <template>
-  <div style="width: 1050px;margin: 20px">
-    <div style="width: 100%;background-color: white;padding: 10px 20px">
+  <div style="margin: 20px">
+    <div style="width: 100%;background-color: white;padding: 10px 20px;box-sizing: border-box;">
       <p style="font-size: 20px;font-weight: bolder">请填写您的转账信息</p>
       <p style="color: #afafaf;font-size: 14px">
         请务必是你本人操作，确认转账金额及收款人信息
       </p>
     </div>
-    <div style="background-color: white;width: 100%;margin-top: 20px;padding: 20px ">
+    <div style="background-color: white;width: 100%;margin-top: 20px;padding: 20px;box-sizing: border-box; ">
 <div>
     <el-steps :active="active" finish-status="success">
     <el-step title="填写转账信息">
@@ -20,12 +20,13 @@
         <div class="activebox" v-show="active === 0">
             <div class="margintop">
                 <span class="colorred">*</span><span>付款账号：</span>
-                <el-input clearable  style="width: 80%;margin-left: 20px" v-model="PaymentAccount" placeholder="付款账号"></el-input>
+                &nbsp;<el-input clearable  style="width: 80%;margin-left: 20px" v-model="PaymentAccount" placeholder="付款账号"></el-input>
             </div>
             <div class="margintop">
                 <span class="colorred">*</span><span>收款账户：</span>
-                <el-input clearable  style="width: 80%;margin-left: 20px" v-model="CollectionAcount" placeholder="收款账户">
-                    <el-select v-model="select" slot="prepend" placeholder="请选择">
+                &nbsp;
+                <el-input clearable  style="width: 80%;margin-left: 20px" v-model="CollectionAcount"  placeholder="收款账户">
+                    <el-select v-model="select" slot="prepend" style="width: 100%" placeholder="请选择">
                         <el-option label="银行卡" value="1"></el-option>
                         <el-option label="支付宝" value="2"></el-option>
                         <el-option label="微信" value="3"></el-option>
@@ -38,7 +39,7 @@
             </div>
             <div class="margintop">
                 <span class="colorred">*</span><span>收款金额：</span>
-                <el-input clearable  style="width: 80%;margin-left: 20px" v-model="CollectionMoney" placeholder="收款金额"></el-input>
+                &nbsp;<el-input clearable  style="width: 80%;margin-left: 20px" v-model="CollectionMoney" placeholder="收款金额"></el-input>
             </div>
             <div class="margintop">
                 <el-button style="margin-top: 12px;" :disabled="!PaymentAccount||!CollectionAcount||!PaymentName||!CollectionMoney" @click="active++">下一步</el-button>

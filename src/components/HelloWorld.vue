@@ -31,25 +31,26 @@
             <i class="el-icon-s-custom"></i>
             <span slot="title">组织员工</span>
             <span class="news" v-show="news[3].length > 0 || news[4].length > 0 || news[5].length > 0 ">new</span>
+            <i v-show="isCollapse && (news[3].length > 0 || news[4].length > 0 || news[5].length > 0)  "  class="mininews">*</i>
           </template>
           <el-menu-item-group index="4-1">
             <el-menu-item index="4-1-1" route="/Offer" v-if="news[3]">
               <i class="el-icon-document"></i>
               <span>Offer管理</span>
               <span class="news" v-show="news[3].length > 0" @click="clicknews(3)">new</span>
-              <i v-show="news[3].length > 0 && isCollapse"  class="mininews">*</i>
+<!--              <i v-show="news[3].length > 0 && isCollapse"  class="mininews">*</i>-->
             </el-menu-item>
             <el-menu-item index="4-1-2" route="/OrganizeEmployees" v-if="news[4]">
               <i class="el-icon-female"></i>
               <span>人员信息</span>
               <span class="news" v-show="news[4].length > 0" @click="clicknews(4)">new</span>
-              <i v-show="news[4].length > 0 && isCollapse"  class="mininews">*</i>
+<!--              <i v-show="news[4].length > 0 && isCollapse"  class="mininews">*</i>-->
             </el-menu-item>
             <el-menu-item index="4-1-3" route="/Salary" v-if="news[5]">
               <i class="el-icon-coin"></i>
             <span>薪酬管理</span>
               <span class="news" v-show="news[5].length > 0" @click="clicknews(5)">new</span>
-              <i v-show="news[5].length > 0 && isCollapse"  class="mininews">*</i>
+<!--              <i v-show="news[5].length > 0 && isCollapse"  class="mininews">*</i>-->
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -58,13 +59,14 @@
             <i class="el-icon-menu"></i>
             <span slot="title">表单页</span>
             <span class="news" v-show="news[6].length > 0" >new</span>
+            <i v-show="news[6].length > 0 && isCollapse"  class="mininews">*</i>
           </template>
           <el-menu-item-group index="5-1">
             <el-menu-item index="5-1-1" route="/Form" v-if="news[6]">
               <i class="el-icon-copy-document"></i>
               <span>分步表单</span>
               <span class="news" v-show="news[6].length > 0" @click="clicknews(6)">new</span>
-              <i v-show="news[6].length > 0 && isCollapse"  class="mininews">*</i>
+<!--              <i v-show="news[6].length > 0 && isCollapse"  class="mininews">*</i>-->
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>

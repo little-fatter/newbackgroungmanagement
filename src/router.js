@@ -5,7 +5,7 @@ import Content from "./views/Content/Content";
 
 Vue.use(Router);
 
-const router =  new Router({
+const router = new Router({
   mode: "history",
   routes: [
     {
@@ -123,21 +123,16 @@ const router =  new Router({
 });
 
 //设置白名单，指不需要登录就可以直接进入的页面
-let whiteList = ["/Login", "/Regist"]
-let user = localStorage.getItem("user")
+// let whiteList = ["/Login", "/Regist"]
+
 
 router.beforeEach((to, from, next) => {
-  if (user) {
-      next()
+  let user = localStorage.user;
+  if (to.path === "/Login" || to.path === "/Regist") {
+    next();
+  } else {
+    user ? next() : next("/Login");
   }
-  else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()//这里是即将进入的页面是白名单的页面就直接进入
-    }
-    else {
-      next({ path: '/Login' })//这里是即将进入的页面不是白名单的页面又没有登录的情况下重定向到登录页面进行登录操作
-    }
-  }
-})
+});
 
-export default router
+export default router;

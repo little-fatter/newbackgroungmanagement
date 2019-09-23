@@ -1,68 +1,67 @@
 <template>
   <div id="nav">
-    <div class="heads">
-      <div>后台管理系统</div>
-      <div @click="tologin">
-          亲爱的:<span v-if="user">{{user.username}}</span>
-      </div>
-    </div>
-      <div style="background-color: #f0f0f0;min-width: 1350px;">
-          <div style="display: flex;">
-              <div>
-                  <Navmean></Navmean>
+    <el-container>
+      <el-header class="heads">
+              <div>后台管理系统</div>
+              <div @click="tologin">
+                亲爱的:<span v-if="user">{{ user.username }}</span>
               </div>
-              <div style="background-color: #f0f0f0;padding: 30px">
-                  <router-view></router-view>
-              </div>
-          </div>
-      </div>
+      </el-header>
+      <el-container>
+        <el-aside width="200px">
+            <Navmean></Navmean>
+        </el-aside>
+        <el-main style="background-color: #f0f0f0;">
+            <router-view></router-view>
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script>
-  import Navmean from "../../components/HelloWorld"
+import Navmean from "../../components/HelloWorld";
 export default {
   name: "Content",
-  components :{
-    Navmean,
+  components: {
+    Navmean
   },
-    data() {
-        return {
-            user: '',
-            time:''
-        }
-    },
-    methods:{
-        tologin(){
-            if (this.user){
-                this.$alert('确认退出?', '退出登录', {
-                    confirmButtonText: '确定',
-                    callback: () => {
-                        localStorage.removeItem("user")
-                        location.reload()
-                    }
-                });
-            }
-            else {
-                this.$router.push("/Login")
-            }
-        }
-    },
-    mounted() {
-        this.user = JSON.parse(localStorage.getItem("user"))
-        this.time = localStorage.getItem("logintime")
+  data() {
+    return {
+      user: "",//用户信息，判断是否登录
+      time: ""//登录的时间
+    };
+  },
+  methods: {
+    tologin() {
+      if (this.user) {
+        this.$confirm("确认退出?", "退出登录", {
+          confirmButtonText: "确定",
+          cancelButtonText: '取消',
+          distinguishCancelAndClose: true,
+        }).then(() =>{
+          localStorage.removeItem("user")
+          location.reload()
+        })
+      } else {
+        this.$router.push("/Login");
+      }
     }
+  },
+  mounted() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.time = localStorage.getItem("logintime");
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.heads{
+.heads {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  background-color:skyblue;
-    /*min-width: 1300px;*/
-    width: 100%;
-    box-sizing: border-box;
+  background-color: skyblue;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>

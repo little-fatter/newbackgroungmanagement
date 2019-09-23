@@ -5,7 +5,7 @@
         </div>
         <div style="width: 900px;padding: 0 10px 10px 0">
             <div style="display: flex;width: 100%;flex-wrap: wrap;">
-                <el-card style="width: 32%;margin: 10px 0 0 10px;font-size: 14px" class="box-card" v-for="item in showMailList" :key="item.id">
+                <el-card style="width: 30%;margin: 10px 0 0 10px;font-size: 14px" class="box-card" v-for="item in showMailList" :key="item.id">
                     <div style="display: flex">
                         <div style="flex: 2">
                             <img style="border-radius: 50%" :src="item.images" alt="">

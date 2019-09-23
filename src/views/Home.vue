@@ -39,6 +39,7 @@ import Circles from "../components/Circles";
 import ProfiCityt from "../components/ProfiCityt";
 import Dynamic from "../components/Dynamic";
   import Questionnaire from "../components/Questionnaire";
+  import dayjs from "dayjs"
 export default {
   name: "home",
   components: {
@@ -50,7 +51,7 @@ export default {
   data() {
     return {
       revenue: [] , //营收
-      choooseitem : 0
+      choooseitem : 0//当前点击项，控制组件的显示隐藏
     };
   },
   methods: {
@@ -67,9 +68,10 @@ export default {
           console.log(err);
         });
     },
+    //点击记录当前点击项的下标
     clkitem(item,index) {
       this.choooseitem = index
-    }
+    },
   },
   mounted() {
     this.getRevenue()

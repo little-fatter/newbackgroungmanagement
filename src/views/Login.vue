@@ -3,66 +3,88 @@
     <el-card v-if="fingpswd" class="box-card">
       <div slot="header" class="clearfix">
         <span>找回密码</span>
-        <el-button @click="outfingpswd" style="float: right; padding: 3px 0" type="text">返回登录</el-button>
+        <el-button
+          @click="outfingpswd"
+          style="float: right; padding: 3px 0"
+          type="text"
+          >返回登录</el-button
+        >
       </div>
       <div>
-        <div class="publics" v-if="index2" style="color: red">*请输入用户名</div>
-        <div class="publics" v-else>*请输入用户名</div
-        >
+        <div class="publics" v-if="index2" style="color: red">
+          *请输入用户名
+        </div>
+        <div class="publics" v-else>*请输入用户名</div>
         <div class="publics">
           <el-input
-                  v-model="usernames"
-                  placeholder="请输入用户名"
-                  clearable
+            v-model="usernames"
+            placeholder="请输入用户名"
+            clearable
           ></el-input>
         </div>
       </div>
       <div>
         <div class="publics" v-if="!email" style="color: red">*请输入邮箱</div>
-        <div class="publics" v-else>*请输入邮箱</div
-        >
+        <div class="publics" v-else>*请输入邮箱</div>
         <div class="publics">
           <el-input
-                  v-model="email"
-                  placeholder="请输入邮箱"
-                  clearable
+            v-model="email"
+            placeholder="请输入邮箱"
+            clearable
           ></el-input>
         </div>
       </div>
       <div style="display: flex;justify-content: center;margin: 10px 20px ">
-        <el-button type="primary" v-if="usernames && email" @click="findpassword">找回密码</el-button>
+        <el-button
+          type="primary"
+          v-if="usernames && email"
+          @click="findpassword"
+          >找回密码</el-button
+        >
         <el-button type="primary" disabled v-else>找回密码</el-button>
       </div>
     </el-card>
     <el-card v-else class="box-card">
       <div slot="header" class="clearfix">
         <div style="display: flex;justify-content: space-around">
-          <div  @click="clklogin" :class="!phonelogin ? 'chooselogin' : ''">账号登录</div>
-          <div  @click="clkphonelogin" :class="phonelogin ? 'chooselogin' : ''">手机登录</div>
+          <div @click="clklogin" :class="!phonelogin ? 'chooselogin' : ''">
+            账号登录
+          </div>
+          <div @click="clkphonelogin" :class="phonelogin ? 'chooselogin' : ''">
+            手机登录
+          </div>
+          <div >
+            <a ref="diva" @click="gotogithub">
+              github登录
+            </a>
+          </div>
         </div>
       </div>
       <div v-if="!phonelogin" class="text item">
         <div>
-          <div class="publics" v-if="index2" style="color: red">*请输入用户名</div>
-          <div class="publics" v-else>*请输入用户名</div
-          >
+          <div class="publics" v-if="index2" style="color: red">
+            *请输入用户名
+          </div>
+          <div class="publics" v-else>*请输入用户名</div>
           <div class="publics">
             <el-input
-                    v-model="usernames"
-                    placeholder="请输入用户名"
-                    clearable
+              v-model="usernames"
+              placeholder="请输入用户名"
+              clearable
             ></el-input>
           </div>
         </div>
         <div>
-          <div class="publics" v-if="index" style="color: red">*请输入密码(6-20位)</div>
+          <div class="publics" v-if="index" style="color: red">
+            *请输入密码(6-20位)
+          </div>
           <div class="publics" v-else>*请输入密码(6-20位)</div>
           <div class="publics" style="display: flex">
             <el-input
-                    placeholder="请输入密码"
-                    v-model="passwords"
-                    show-password
-                    clearable
+              placeholder="请输入密码"
+              v-model="passwords"
+              show-password
+              clearable
             ></el-input>
             <el-button type="success" @click="tofindpswd">
               找回密码
@@ -70,14 +92,15 @@
           </div>
         </div>
         <div>
-          <div class="publics" v-if="index1" style="color: red">*请输入验证码</div>
-          <div class="publics" v-else>*请输入验证码</div
-          >
+          <div class="publics" v-if="index1" style="color: red">
+            *请输入验证码
+          </div>
+          <div class="publics" v-else>*请输入验证码</div>
           <div class="publics" style="display: flex;align-items: center">
             <el-input
-                    placeholder="请输入验证码"
-                    v-model="vcodes"
-                    clearable
+              placeholder="请输入验证码"
+              v-model="vcodes"
+              clearable
             ></el-input>
             <div v-html="svg" @click="vcodechange"></div>
           </div>
@@ -85,23 +108,31 @@
       </div>
       <div v-else class="text item">
         <div>
-          <div class="publics" v-if="index2" style="color: red">*请输入手机号</div>
+          <div class="publics" v-if="index2" style="color: red">
+            *请输入手机号
+          </div>
           <div class="publics" v-else>*请输入手机号</div>
           <div class="publics" style="display: flex">
             <el-input v-model="phone" placeholder="请输入手机号" clearable>
             </el-input>
-            <el-button type="success" v-if="index2" disabled>发送验证码</el-button>
-            <el-button type="success" v-else @click="sendmsg">发送验证码</el-button>
+            <el-button type="success" v-if="index2" disabled
+              >发送验证码</el-button
+            >
+            <el-button type="success" v-else :loading="loading" @click="sendmsg"
+              >发送验证码</el-button
+            >
           </div>
         </div>
         <div>
-          <div class="publics" v-if="index1" style="color: red">*请输入验证码</div>
+          <div class="publics" v-if="index1" style="color: red">
+            *请输入验证码
+          </div>
           <div class="publics" v-else>*请输入验证码</div>
           <div class="publics">
             <el-input
-                    placeholder="请输入验证码"
-                    v-model="VerificationCode"
-                    clearable
+              placeholder="请输入验证码"
+              v-model="VerificationCode"
+              clearable
             ></el-input>
           </div>
         </div>
@@ -121,7 +152,7 @@
 </template>
 
 <script>
-  import dayjs from "dayjs"
+import dayjs from "dayjs";
 export default {
   name: "register",
   data() {
@@ -131,169 +162,204 @@ export default {
       dialogVisible: false,
       usernames: "",
       passwords: "",
-      codes: "",
-      msg: "",
-      svg: "",
-      vcodes: "",
+      codes: "",//请求返回的code值
+      msg: "",//控制弹出框显示的文本
+      svg: "",//后台返回的图形验证码标签
+      vcodes: "",//图形验证码
       index: true,
       index1: true,
       index2: true,
-      VerificationCode: "",
+      VerificationCode: "",//短信验证码
       phone: "",
       fingpswd: false,
       email: "",
+      loading:false //控制input框点击后进入加载状态
     };
   },
   methods: {
-    findpassword(){
-      this.$axios.req("api/users/findpswd",{
-        username: this.usernames,
-        emails: this.email
-      }).then(res =>{
-        console.log(res);
-      }).catch(err =>{
-        console.log(err);
-      })
-    },
-    outfingpswd(){
-      this.fingpswd = false
-      this.usernames = ""
-      this.email = ""
-    },
-    tofindpswd(){
-      this.fingpswd = true
-      this.usernames = "";
-      this.passwords = "";
-      this.vcodes = "";
-    },
-    clkphonelogin() {
-      this.phonelogin = true;
-      this.usernames = "";
-      this.passwords = "";
-      this.vcodes = "";
-    },
-    clklogin() {
-      this.phonelogin = false;
-      this.phone = "";
-      this.VerificationCode = "";
-    },
-    //用户注册
-    Userregister() {
-      this.$router.push("/Regist");
-    },
-    //更换标签
-    vcodechange() {
-      this.getcode();
-    },
-    //关闭弹窗
-    pagechanges() {
-      this.dialogVisible = false;
-      if (this.codes === 200) {
-        // this.$store.state.user = this.usernames;
-        this.$router.push("/");
-      } else {
-        this.usernames = "";
-        this.passwords = "";
-        this.vcodes = "";
-      }
-    },
-    //用户登录
-    Userlogin() {
-      if (this.phonelogin) {
-        if (!this.index1 && !this.index2){
+    //发送请求找回密码
+      findpassword() {
           this.$axios
-                  .req("api/users/phonelogin", {
-                    phone: this.phone,
-                    code: this.VerificationCode
-                  })
-                  .then(res => {
-                    this.codes = res.data.code
-                    this.msg = res.data.msg
-                    if (res.data.code === 200) {
-                      let d = new Date();
-                      let times = dayjs(d).format("HH");
-                      let user = res.data.data;
-                      localStorage.setItem("user", JSON.stringify(user));
-                      localStorage.setItem("logintime", times);
-                    }
-
-                  })
-                  .catch(err => {
-                    console.log(err);
-                  });
-        }
-        else {
-          this.phone = "";
-          this.VerificationCode = "";
-          this.msg = "输入错误"
-        }
-      }
-      else {
-        this.getcode();
-        if (
-          this.index === false &&
-          this.index1 === false &&
-          this.index2 === false
-        ) {
-          this.$axios
-            .req("api/users/login", {
-              username: this.usernames,
-              password: this.passwords,
-              code: this.vcodes
-            })
-            .then(item => {
-              this.codes = item.data.code
-              this.msg = item.data.msg
-              if (item.data.code === 200) {
-                let d = new Date();
-                let times = dayjs(d).format("HH");
-                let user = item.data.data;
-                localStorage.setItem("user", JSON.stringify(user));
-                localStorage.setItem("logintime", times);
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        } else {
+              .req("api/users/findpswd", {
+                  username: this.usernames,
+                  emails: this.email
+              })
+              .then(res => {
+                if(res){
+                  this.dialogVisible = true
+                  this.msg = res.data.msg
+                  console.log(res.data.msg);
+                }
+              })
+              .catch(err => {
+                  console.log(err);
+              });
+      },
+    //退出找回密码
+    outfingpswd() {
+          this.fingpswd = false;
+          this.usernames = "";
+          this.email = "";
+      },
+    //进入找回密码
+      tofindpswd() {
+          this.fingpswd = true;
           this.usernames = "";
           this.passwords = "";
           this.vcodes = "";
-          this.msg = "输入错误"
-        }
-      }
-      let times  = setTimeout(() =>{
-        this.dialogVisible = true
-        clearTimeout(times)
-      },500)
-
-    },
-    //获取图片验证码
-    getcode() {
-      this.$axios
-        .req("api/captcha")
-        .then(item => {
-          this.svg = item.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    sendmsg() {
-      if (!this.index2) {
-        this.$axios
-          .req("api/users/sendmsg", {
-            phone: this.phone
-          })
-          .then(res => {
-            console.log(2);
-            console.log(res);
-          })
-          .catch(err => {
+      },
+    //点击手机登录
+      clkphonelogin() {
+          this.phonelogin = true;
+          this.usernames = "";
+          this.passwords = "";
+          this.vcodes = "";
+      },
+    //点击账号登录
+      clklogin() {
+          this.phonelogin = false;
+          this.phone = "";
+          this.VerificationCode = "";
+      },
+      //用户注册
+      Userregister() {
+          this.$router.push("/Regist");
+      },
+      //更换标签
+      vcodechange() {
+          this.getcode();
+      },
+      //关闭弹窗
+      pagechanges() {
+          this.dialogVisible = false;
+          if (this.codes === 200) {
+              // this.$store.state.user = this.usernames;
+              this.$router.push("/");
+          } else {
+              this.usernames = "";
+              this.passwords = "";
+              this.vcodes = "";
+              this.email= '';
+          }
+      },
+      //用户登录
+      Userlogin() {
+          if (this.phonelogin) {
+              if (!this.index1 && !this.index2) {
+                  this.$axios
+                      .req("api/users/phonelogin", {
+                          phone: this.phone,
+                          code: this.VerificationCode
+                      })
+                      .then(res => {
+                          this.codes = res.data.code;
+                          this.msg = res.data.msg;
+                          if (res.data.code === 200) {
+                              let d = new Date();
+                              let times = dayjs(d).format("HH");
+                              let user = res.data.data;
+                              localStorage.setItem("user", JSON.stringify(user));
+                              localStorage.setItem("logintime", times);
+                          }
+                      })
+                      .catch(err => {
+                          console.log(err);
+                      });
+              } else {
+                  this.phone = "";
+                  this.VerificationCode = "";
+                  this.msg = "输入错误";
+              }
+          } else {
+              this.getcode();
+              if (
+                  this.index === false &&
+                  this.index1 === false &&
+                  this.index2 === false
+              ) {
+                  this.$axios
+                      .req("api/users/login", {
+                          username: this.usernames,
+                          password: this.passwords,
+                          code: this.vcodes
+                      })
+                      .then(item => {
+                          this.codes = item.data.code;
+                          this.msg = item.data.msg;
+                          if (item.data.code === 200) {
+                              let d = new Date();
+                              let times = dayjs(d).format("HH");
+                              let user = item.data.data;
+                              localStorage.setItem("user", JSON.stringify(user));
+                              localStorage.setItem("logintime", times);
+                          }
+                      })
+                      .catch(err => {
+                          console.log(err);
+                      });
+              } else {
+                  this.usernames = "";
+                  this.passwords = "";
+                  this.vcodes = "";
+                  this.msg = "输入错误";
+              }
+          }
+          let times = setTimeout(() => {
+              this.dialogVisible = true;
+              clearTimeout(times);
+          }, 500);
+      },
+      //获取图片验证码
+      getcode() {
+          this.$axios
+              .req("api/captcha")
+              .then(item => {
+                  this.svg = item.data;
+              })
+              .catch(err => {
+                  console.log(err);
+              });
+      },
+    //发送验证码
+      sendmsg() {
+        this.loading = true
+        let that = this
+        let time = setTimeout(() =>{
+          that.loading = false
+          clearTimeout(time)
+        },5000)
+          if (!this.index2) {
+              this.$axios
+                  .req("api/users/sendmsg", {
+                      phone: this.phone
+                  })
+                  .then(res => {
+                      this.dialogVisible = true
+                    this.msg = res.data.msg
+                  })
+                  .catch(err => {
+                      console.log(err);
+                  });
+          }
+      },
+    //github 登录
+      gotogithub() {
+          let link = this.$refs.diva
+          link.href = "https://github.com/login/oauth/authorize?client_id=142f92588f739be3cff5"
+          this.$axios.req("api/githubUser").then(res =>{
+            if (res){
+              let d = new Date();
+              let times = dayjs(d).format("HH");
+              let user = {"_id":res.data.data.id,"username":res.data.data.login,
+                "password":null,"phone":null,"createDate":res.data.data.created_at}
+              localStorage.setItem("user", JSON.stringify(user));
+              localStorage.setItem("logintime", times);
+            }
+          }).catch(err =>{
             console.log(err);
-          });
+          })
+
       }
-    }
   },
   mounted() {
     this.getcode();
@@ -336,15 +402,15 @@ export default {
 </script>
 
 <style scoped>
-  .publics{
-    margin-top: 10px;
-  }
-  .chooselogin {
-    background-color: #76C84E;
-    padding: 4px 20px;
-    color: white;
-    border-radius: 5px;
-  }
+.publics {
+  margin-top: 10px;
+}
+.chooselogin {
+  background-color: #76c84e;
+  padding: 4px 20px;
+  color: white;
+  border-radius: 5px;
+}
 .text {
   font-size: 14px;
 }
