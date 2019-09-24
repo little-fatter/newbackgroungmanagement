@@ -270,7 +270,8 @@ export default {
                   this.VerificationCode = "";
                   this.msg = "输入错误";
               }
-          } else {
+          }
+          else {
               this.getcode();
               if (
                   this.index === false &&
@@ -290,7 +291,7 @@ export default {
                               let d = new Date();
                               let times = dayjs(d).format("HH");
                               let user = item.data.data;
-                              localStorage.setItem("user", JSON.stringify(user));
+                            localStorage.setItem("user", JSON.stringify(user));
                               localStorage.setItem("logintime", times);
                           }
                       })
@@ -351,7 +352,8 @@ export default {
               let d = new Date();
               let times = dayjs(d).format("HH");
               let user = {"_id":res.data.data.id,"username":res.data.data.login,
-                "password":null,"phone":null,"createDate":res.data.data.created_at}
+                "password":null,"phone":null,"createDate":res.data.data.created_at
+              ,"avatar":res.data.data.avatar_url}
               localStorage.setItem("user", JSON.stringify(user));
               localStorage.setItem("logintime", times);
             }

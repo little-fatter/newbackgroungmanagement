@@ -20,7 +20,7 @@
     <div style="margin: 20px 20px 0">
       <div>如果有更多的渠道请自行添加，所有添加的渠道会显示在CRM系统中</div>
     </div>
-    <div style="width: 1050px;background-color: white;padding: 20px;margin-top: 20px">
+    <div style="background-color: white;padding: 20px;margin-top: 20px">
       <div style="margin: 0 20px 20px;font-weight: bold;font-size: 20px">薪资结构</div>
       <div>
         <div class="rowbox">
@@ -161,7 +161,7 @@ input {
   padding: 4px 2px;
   text-align: center;
   font-size: 16px;
-    width: 180px;
+    width: 140px;
 }
 .backcolor{
     border: none;
